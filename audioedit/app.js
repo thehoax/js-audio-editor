@@ -37,12 +37,14 @@ http.createServer(app).listen(app.get('port'), function(){
 
 app.post('/upload', function(req, res){
 console.log(req.files.uploadedAudio);
+var typeCheck = /audio/i;
+if(typeCheck.test(req.files.uploadedAudio.type)){
 var destination = './audio/' + req.files.uploadedAudio.name;
 
     fs.rename(req.files.uploadedAudio.path, destination, function(error) {
             if(error) {
 				res.send({
-                    error: 'Welp. Something is amiss.'
+                    error: 'Server error.'
 					});
             	return;
             }
@@ -51,5 +53,9 @@ var destination = './audio/' + req.files.uploadedAudio.name;
 				path: destination
             	});
 	});
-
+} else {
+res.send({
+	error: 'Wrong file type.'
+	});
+}
 });

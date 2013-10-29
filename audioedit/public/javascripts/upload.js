@@ -1,5 +1,5 @@
 $(document).ready(function() {
-	uploadStatus('Please select a file, any file.');
+	uploadStatus('Please select an audio file.');
 	
 	var timer;
 	timer = setInterval(function() {
@@ -17,7 +17,7 @@ $(document).ready(function() {
 				},
 			success: function(response) {
 				if(response.error){
-					uploadStatus('Oh no! Something went wrong.');
+					uploadStatus('Oh no! ' + response.error);
 					return;
 				}
 				var fileUrl = response.path;
@@ -29,6 +29,8 @@ $(document).ready(function() {
 		});
 		
 	function uploadStatus(message) {
-			$('#uploadStatus').text(message);
+		$('#uploadStatus').text(message);
 		}
+	
+
 })
