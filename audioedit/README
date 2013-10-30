@@ -1,0 +1,9 @@
+JS audio editor v0.1
+
+1. Ściągnij i zainstaluj node.js
+2. z konsoli wejdź do katalogu audioedit i wykonaj 'node app'
+3. serwer powinien stanąć, testową stronę z uploadem znajdziesz na http://localhost:3000/index.html
+4. strona (index.html) zawiera formularz (jquery.form) do wrzucania pliku i poniżej wyświetla status, uploadem zajmuje sie upload.js
+5. formularz domyślnie jest ustawiony na przyjmowanie plików audio, ale można być cwanym i wrzucić tam coś innego, w takim wypadku zwracany jest error.
+6. serwer (app.js) sprawdza typ mime pliku, jeżeli jest 'audio/*' kopiuje plik z folderu temp do /audioedit/audio/
+
