@@ -1,19 +1,24 @@
 <html>
 	<head>
-		<title>Testowy upload v0.1</title>
+		<title>JS-Audioedit v0.02</title>
 	</head>
 	
 	<body>
 		
+		<div id="formView">
 		<form id="uploadForm" enctype="multipart/form-data" action="/upload" method="post">
 		<input type="file" id="audioUpload" name="uploadedAudio" accept='audio/*' />
 		</form>
 		<span id="uploadStatus"></span>
-				
+		</div>
+		<div hidden id="audioControls">
+		<audio controls id="audioFile">Your browser needs some HTML5 love, man.</audio>
+		</div>
 		
 		<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 		<script src="/javascripts/jquery.form.js"></script>
 		<script src="/javascripts/upload.js"></script>
+		<script src="/javascripts/player.js"></script>
 				
 	</body>
 </html>

@@ -9,6 +9,10 @@ var user = require('./routes/user');
 var http = require('http');
 var path = require('path');
 var fs = require('fs');
+var lame = require('lame');
+var speaker = require('speaker');
+var socket
+var filePath;
 
 var app = express();
 
@@ -40,6 +44,7 @@ console.log(req.files.uploadedAudio);
 var typeCheck = /audio/i;
 if(typeCheck.test(req.files.uploadedAudio.type)){
 var destination = './audio/' + req.files.uploadedAudio.name;
+filePath = destination
 
     fs.rename(req.files.uploadedAudio.path, destination, function(error) {
             if(error) {
@@ -58,4 +63,22 @@ res.send({
 	error: 'Wrong file type.'
 	});
 }
+});
+
+app.get('/stream', function(req,res) {
+
+	var stream = fs.createReadStream(filePath)
+	res.writeHead(200, {
+        'Content-Type': 'audio/mpeg', 
+        'Content-Length': fs.statSync(filePath).size
+    });
+	stream.on('data', function(data){
+		
+		res.write(data);
+		});
+	
+	stream.on('end', function(){
+		res.end();
+		});
+
 });
